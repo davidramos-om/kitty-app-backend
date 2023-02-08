@@ -1,0 +1,92 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+directive @upper on FIELD_DEFINITION
+
+"""platform"""
+type Platform {
+  id: String!
+  name: String!
+  symbol: String!
+  slug: String!
+  token_address: String!
+}
+
+type CoinStats {
+  """id"""
+  id: String!
+  symbol: String!
+  name: String
+  usd_price: Float
+  creationDate: Date
+  cmc_rank: Float!
+  max_supply: Float!
+  circulating_supply: Float!
+  total_supply: Float!
+  market_cap_usd: Float!
+  ath: Float!
+  atl: Float!
+  icon: String
+  platform: Platform
+  sparkline_in_7d: [Float!]
+}
+
+type Coin {
+  """id"""
+  id: String!
+  rank: Float!
+  usd_price: Float!
+  name: String
+  symbol: String!
+  icon: String
+}
+
+type CoinMeta {
+  """id"""
+  id: String!
+  name: String
+  symbol: String!
+  description: String!
+  icon: String!
+}
+
+"""Date custom scalar type"""
+scalar Date
+
+type Query {
+  coinStats(page: Int! = 0, take: Int! = 25, search: String = "", sort: MARKET_CAP_SORT = MARKET_CAP, sort_dir: OPTIONAL_COING_META_FIELDS = DESC): [CoinStats!]!
+  coinMap(page: Int! = 0, take: Int! = 25, id: [Int!]! = [], sort: MAP_SORT_TYPE = ID): [Coin!]!
+  coinMetaInfo(ids: [Int!]! = [], slugs: [String!] = [], symbols: [String!] = [], address: String = ""): [CoinMeta!]!
+}
+
+"""Market cap sort"""
+enum MARKET_CAP_SORT {
+  NAME
+  SYMBOL
+  DATE_ADDED
+  MARKET_CAP
+  CIRCULATING_SUPPLY
+  TOTAL_SUPPLY
+  MAX_SUPPLY
+  MARKET_CAP_STRICT
+  MARKET_CAP_BY_TOTAL_SUPPLY_STRICT
+  VOLUME_7D
+  VOLUME_30D
+}
+
+"""Optionally list of supplemental data fields to return"""
+enum OPTIONAL_COING_META_FIELDS {
+  ASC
+  DESC
+}
+
+"""Market cap sort"""
+enum MAP_SORT_TYPE {
+  ID
+  CMC_RANK
+}
+
+type Subscription {
+  priceUpdated: CoinStats!
+}
