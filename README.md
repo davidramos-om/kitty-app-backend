@@ -1,5 +1,5 @@
-Nest JS API
-
+# Nest JS API
+<hr/>
 
 ## Description
 This is a simple GraphQL API built with Nest JS. 
@@ -50,9 +50,7 @@ Also it connects to the CoinGecko API to get additional information about the cr
 }
 ```
 </details>
-
 <br/>
-
 <details>
 <summary>2. Run the following commands</summary>
 
@@ -63,5 +61,15 @@ Also it connects to the CoinGecko API to get additional information about the cr
     vercel --prod # Deploy to production   
 ```
 </details>
+<br/>
+<details>
+<summary>3. Issues with the deployment</summary>
 
+1. EROFS: read-only file system, open 'schema.gql' : 
+    - Solution: in app.module, change the following:
+    ```ts
+    // autoSchemaFile: 'schema.gql',
+     autoSchemaFile: true, // or isDevlEnvironment() ? 'schema.gql' : true,
+    ```
 
+</details>
