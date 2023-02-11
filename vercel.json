@@ -2,14 +2,20 @@
     "version": 2,
     "builds": [
         {
-            "src": "src/main.ts",
-            "use": "@vercel/node"
+            "src": "public/main.js",
+            "use": "@vercel/node",
+            "config": {
+                "maxLambdaSize": "10mb",
+                "includeFiles": [
+                    "public/dist/**"
+                ]
+            }
         }
     ],
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "src/main.ts",
+            "dest": "public/dist/main.js",
             "methods": [
                 "GET",
                 "POST",

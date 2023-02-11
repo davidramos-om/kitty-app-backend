@@ -15,6 +15,7 @@ async function bootstrap() {
   Logger.debug(`Playground ${await app.getUrl()}/graphql`);
   Logger.debug("Api key : " + cf.crypto.CMC_KEY);
   Logger.debug("Api url : " + cf.crypto.CMC_URL);
+  Logger.debug("Env : " + cf.env);
 }
 
 bootstrap();
