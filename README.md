@@ -15,10 +15,11 @@ Also it connects to the CoinGecko API to get additional information about the cr
 
 ## Deploy to Vercel
 
+`Disable CL/CD in Vercel and deploy manually.`
 <details>
 <summary>1. Create a vercel config file</summary>
-<p><br/>add a file called 'vercel.json` to the root of the project with a content like this:
-</p>
+<br/>
+Add a file called `vercel.json` to the root of the project with a content like this:
 
 ```json
 {
@@ -65,7 +66,7 @@ Also it connects to the CoinGecko API to get additional information about the cr
 <details>
 <summary>3. Issues with the deployment</summary>
 
-1. EROFS: read-only file system, open 'schema.gql' : 
+1. EROFS: read-only file system, open `schema.gql` : 
     - Solution: in app.module, change the following:
     ```ts
     // autoSchemaFile: 'schema.gql',
