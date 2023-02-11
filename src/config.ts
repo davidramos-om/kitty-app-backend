@@ -1,5 +1,5 @@
 export default () => ({
-    port: parseInt(process.env.PORT, 10) || 5001,
+    port: parseInt(String(process.env.PORT || 5001)),
     env: String(process.env.NODE_ENV || 'development'),
     crypto: {
         CMC_KEY: String(process.env.CMC_API_KEY || ''),

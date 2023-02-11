@@ -9,7 +9,7 @@ async function bootstrap() {
 
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
-  await app.listen(5001);
+  await app.listen(cf.port);
 
   Logger.verbose(`\n\nApplication is running on: ${await app.getUrl()}`);
   Logger.debug(`Playground ${await app.getUrl()}/graphql`);
