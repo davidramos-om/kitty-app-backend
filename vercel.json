@@ -2,7 +2,7 @@
     "version": 2,
     "builds": [
         {
-            "src": "public/main.js",
+            "src": "dist/main.js",
             "use": "@vercel/node",
             "config": {
                 "maxLambdaSize": "10mb",
@@ -15,7 +15,7 @@
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "public/main.js",
+            "dest": "dist/main.js",
             "methods": [
                 "GET",
                 "POST",

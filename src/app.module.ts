@@ -4,6 +4,7 @@ import { GraphQLModule } from "@nestjs/graphql";
 import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 import { DirectiveLocation, GraphQLDirective } from "graphql";
 
+import { isDevlEnvironment } from 'src/util/helper';
 import { upperDirectiveTransformer } from "./common/directives/upper-case.directive";
 import { CoinsModule } from './coins/coins.module';
 import { AppController } from './app.controller';
@@ -18,10 +19,12 @@ import configuration from './config';
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: 'schema.gql',
+      // autoSchemaFile: 'schema.gql',
+      // autoSchemaFile: true,
+      autoSchemaFile: isDevlEnvironment() ? 'schema.gql' : true,
       transformSchema: schema => upperDirectiveTransformer(schema, 'upper'),
       installSubscriptionHandlers: true,
-      playground: true,
+      playground: isDevlEnvironment(),
       buildSchemaOptions: {
         directives: [
           new GraphQLDirective({
@@ -35,4 +38,5 @@ import configuration from './config';
   controllers: [ AppController ],
   providers: [ AppService ],
 })
+  
 export class AppModule { }

@@ -15,4 +15,10 @@ export class AppController {
     return this.appService.getGreeter();
   }
 
+  @Get('info')
+  serverInfo() {  
+    return this.appService.serverInfo();
+  }
+
+
 }

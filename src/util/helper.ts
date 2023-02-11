@@ -31,3 +31,7 @@ export const isJSON = (input: string) => (
             .replace(rxFour, '')
     )
 );
+
+export function isDevlEnvironment() {
+    return process.env.NODE_ENV === 'development';
+}

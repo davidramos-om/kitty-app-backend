@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class AppService {
   getGreeter() {
-    
+
     //say hello world in different languages
     const helloWorld = {
       en: 'Hello World!',
@@ -26,14 +26,24 @@ export class AppService {
       da: 'Hej Verden!',
       fi: 'Hei maailma!',
       cs: 'Ahoj světe!',
-      el: 'Γειά σου Κόσμε!',      
+      el: 'Γειά σου Κόσμε!',
     }
 
     //get the language from the browser
-    return helloWorld;    
+    return helloWorld;
   }
 
   getHello(): string {
     return 'Hello World!';
+  }
+
+  serverInfo() {
+    return {
+      enviroment: (process.env.NODE_ENV || 'development'),
+      port: (process.env.PORT || 0),
+      version: process.env.npm_package_version,
+      name: process.env.npm_package_name,
+      description: process.env.npm_package_description,
+    }
   }
 }
