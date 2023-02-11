@@ -21,6 +21,7 @@ import configuration from './config';
       autoSchemaFile: 'schema.gql',
       transformSchema: schema => upperDirectiveTransformer(schema, 'upper'),
       installSubscriptionHandlers: true,
+      playground: true,
       buildSchemaOptions: {
         directives: [
           new GraphQLDirective({
