@@ -24,7 +24,8 @@ import configuration from './config';
       autoSchemaFile: isDevlEnvironment() ? 'schema.gql' : true,
       transformSchema: schema => upperDirectiveTransformer(schema, 'upper'),
       installSubscriptionHandlers: true,
-      playground: isDevlEnvironment(),
+      // playground: isDevlEnvironment(),
+      playground: true,
       buildSchemaOptions: {
         directives: [
           new GraphQLDirective({
@@ -33,6 +34,9 @@ import configuration from './config';
           }),
         ],
       },
+      cors: {
+        origin: '*',
+      }
     }),
   ],
   controllers: [ AppController ],

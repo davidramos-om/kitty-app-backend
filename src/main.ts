@@ -10,6 +10,12 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
   await app.listen(cf.port);
+  app.enableCors({
+    "origin": "*",
+    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+    "preflightContinue": true,
+    "optionsSuccessStatus": 204
+  });
 
   Logger.verbose(`\n\nApplication is running on: ${await app.getUrl()}`);
   Logger.debug(`Playground ${await app.getUrl()}/graphql`);
