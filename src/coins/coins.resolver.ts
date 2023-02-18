@@ -1,7 +1,7 @@
 import { Args, Query, Resolver, Subscription } from '@nestjs/graphql';
 import { PubSub } from 'graphql-subscriptions';
 
-import { CoinDto, CoinMetaDto, CoinStatsModel } from './models/coins.model';
+import { CoinDto, CoinMetaDto, CoinStatsModel, MarketPriceModel } from './models/coins.model';
 import { CoinMetaArgs, MapSearchArgs, SearchArgs } from './dto/search.args';
 import { CoinsService } from './coins.service';
 
@@ -25,6 +25,14 @@ export class CoinResolver {
     @Query(() => [ CoinMetaDto ], { defaultValue: [] })
     coinMetaInfo(@Args() args: CoinMetaArgs): Promise<CoinMetaDto[]> {
         return this.coinService.coinMetaInfo(args);
+    }
+
+    @Query(() => [ MarketPriceModel ], { defaultValue: [] })
+    coinMarketPrice(
+        @Args('ids', { type: () => [ String ], defaultValue: [] }) ids: string[],
+    ): Promise<MarketPriceModel[]> {
+
+        return this.coinService.marketPrice(ids);
     }
 
     @Subscription(() => CoinStatsModel)

@@ -3,7 +3,7 @@ import { Injectable } from "@nestjs/common";
 import { HttpGet } from 'src/util/fetch.service';
 import { QueryString, Slugify } from 'src/util/helper';
 import { MARKET_CAP_SORT, SORT_DIRECTION } from "src/common/enums";
-import { CoinDto, CoinMetaDto, CoinStatsModel } from "./models/coins.model";
+import { CoinDto, CoinMetaDto, CoinStatsModel, MarketPriceModel } from "./models/coins.model";
 import { CoinMetaArgs, MapSearchArgs, SearchArgs } from './dto/search.args';
 
 import config from '../config';
@@ -196,5 +196,45 @@ export class CoinsService {
         }
 
         return new Array<CoinMetaDto>();
+    }
+
+    async marketPrice(ids: String[]): Promise<MarketPriceModel[]> {
+
+        const params = {
+            ids: ids.join(','),
+            vs_currency: 'usd',
+            order: 'market_cap_desc',
+            per_page: 100,
+            sparkline: false,
+        };
+
+        const queryString = QueryString(params);
+        const result = await HttpGet('coingecko', 'coins/markets?' + queryString);
+        const data = result?.data || null;
+
+        const list = new Array<MarketPriceModel>();
+
+        if (Array.isArray(data)) {
+
+            for (const coin of data) {
+
+                const item: MarketPriceModel = {
+                    id: coin.id || '',
+                    name: coin.name || '',
+                    symbol: coin.symbol || '',
+                    image: coin.image || '',
+                    current_price: coin.current_price || 0,
+                    market_cap: coin.market_cap || 0,
+                    market_cap_rank: coin.market_cap_rank || 0,
+                    p_change_24h: coin.price_change_percentage_24h || 0,
+                    ath: coin.ath || 0,
+                    atl: coin.atl || 0,
+                };
+
+                list.push(item);
+            }
+        }
+
+        return list;
     }
 }

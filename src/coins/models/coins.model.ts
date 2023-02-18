@@ -1,5 +1,5 @@
 import { Directive, Field, ObjectType } from '@nestjs/graphql';
-import { MarketChartModel, PlatformModel } from './PlatformModel';
+import { PlatformModel } from './PlatformModel';
 
 @ObjectType('CoinStats')
 export class CoinStatsModel {
@@ -95,4 +95,39 @@ export class CoinMetaDto {
 
     @Field(type => String)
     icon: string;
+}
+
+@ObjectType('MarketPriceModel')
+export class MarketPriceModel {
+
+    @Field()
+    id: string;
+
+    @Field()
+    symbol: string;
+
+    @Field({ nullable: true })
+    name: string;
+
+    @Field({ nullable: true })
+    current_price: number;
+
+    @Field({ nullable: true })
+    image: string;
+
+    @Field({ nullable: true })
+    market_cap: number;
+
+    @Field({ nullable: true })
+    market_cap_rank: number;
+
+    @Field({ nullable: true })
+    p_change_24h: number;
+
+    @Field({ nullable: true })
+    ath: number;
+
+    @Field({ nullable: true })
+    atl: number;
+
 }

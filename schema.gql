@@ -51,6 +51,19 @@ type CoinMeta {
   icon: String!
 }
 
+type MarketPriceModel {
+  id: String!
+  symbol: String!
+  name: String
+  current_price: Float
+  image: String
+  market_cap: Float
+  market_cap_rank: Float
+  p_change_24h: Float
+  ath: Float
+  atl: Float
+}
+
 """Date custom scalar type"""
 scalar Date
 
@@ -58,6 +71,7 @@ type Query {
   coinStats(page: Int! = 0, take: Int! = 25, search: String = "", sort: MARKET_CAP_SORT = MARKET_CAP, sort_dir: OPTIONAL_COING_META_FIELDS = DESC): [CoinStats!]!
   coinMap(page: Int! = 0, take: Int! = 25, id: [Int!]! = [], sort: MAP_SORT_TYPE = ID): [Coin!]!
   coinMetaInfo(ids: [Int!]! = [], slugs: [String!] = [], symbols: [String!] = [], address: String = ""): [CoinMeta!]!
+  coinMarketPrice(ids: [String!]! = []): [MarketPriceModel!]!
 }
 
 """Market cap sort"""
