@@ -19,9 +19,9 @@ import configuration from './config';
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: 'schema.gql',
+      // autoSchemaFile: 'schema.gql',
       // autoSchemaFile: true,
-      // autoSchemaFile: isDevlEnvironment() ? 'schema.gql' : true,
+      autoSchemaFile: isDevlEnvironment() ? 'schema.gql' : true,
       transformSchema: schema => upperDirectiveTransformer(schema, 'upper'),
       installSubscriptionHandlers: true,
       playground: isDevlEnvironment(),
